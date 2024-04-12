@@ -16,7 +16,7 @@ receivers:
 
 exporters:
   debug:
-  otlp:
+  otlp/flopsar:
     endpoint: "flopsar:4317"
     tls:
       insecure: true
@@ -46,7 +46,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlp, debug, spanmetrics]
+      exporters: [otlp, debug, spanmetrics, otlp/flopsar]
     metrics:
       receivers: [httpcheck/frontendproxy, otlp, spanmetrics]
       processors: [batch]

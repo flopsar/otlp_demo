@@ -45,6 +45,33 @@ services:
         condition: service_healthy
     logging: *logging
 
+  # Konakart 
+  konakart:
+    image: flopsar/ecommerce
+    container_name: konakart 
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+    restart: unless-stopped
+    ports:
+      - "8780:8780"
+      - "8783:8783"
+    environment:
+      - FLAGD_HOST
+      - FLAGD_PORT
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://${OTEL_COLLECTOR_HOST}:${OTEL_COLLECTOR_PORT_HTTP}
+      - OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
+      - OTEL_RESOURCE_ATTRIBUTES
+      - OTEL_LOGS_EXPORTER=otlp
+      - OTEL_SERVICE_NAME=konakart
+      - FLOPSAR_MANAGER=flopsar
+    depends_on:
+      otelcol:
+        condition: service_started
+      flagd:
+        condition: service_started
+
   # AdService
   adservice:
     image: ${IMAGE_NAME}:${DEMO_VERSION}-adservice

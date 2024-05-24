@@ -52,7 +52,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 300M
+          memory: 3000M
     restart: unless-stopped
     ports:
       - "8780:8780"

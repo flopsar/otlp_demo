@@ -133,6 +133,7 @@ start:
 	@echo "Go to http://localhost:8080/jaeger/ui for the Jaeger UI."
 	@echo "Go to http://localhost:8080/grafana/ for the Grafana UI."
 	@echo "Go to http://localhost:8080/loadgen/ for the Load Generator UI."
+	@(./flopsar.sh)
 
 .PHONY: start-minimal
 start-minimal:

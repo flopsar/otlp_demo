@@ -131,7 +131,6 @@ start:
 	@echo "Go to http://localhost:9443 for the Flopsar UI."
 	@echo "Go to http://localhost:8080 for the demo UI."
 	@echo "Go to http://localhost:8080/loadgen/ for the Load Generator UI."
-	@(./flopsar.sh)
 
 .PHONY: start-minimal
 start-minimal:

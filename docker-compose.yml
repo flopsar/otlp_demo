@@ -58,6 +58,7 @@ services:
       - "8780:8780"
       - "8783:8783"
     environment:
+      - FLOPSAR_SERVER=flopsar
       - FLAGD_HOST
       - FLAGD_PORT
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://${OTEL_COLLECTOR_HOST}:${OTEL_COLLECTOR_PORT_HTTP}
@@ -67,6 +68,8 @@ services:
       - OTEL_SERVICE_NAME=konakart
       - FLOPSAR_MANAGER=flopsar
     depends_on:
+      flopsar:
+        condition: service_started
       otelcol:
         condition: service_started
       flagd:
@@ -699,7 +702,7 @@ services:
   # FLOPSAR
   flopsar:
     image: ${FLOPSAR_IMAGE}
-    container_name: flopsar-server 
+    container_name: flopsar 
     restart: unless-stopped
     ports:
       - "4317:4317"          # OTLP over gRPC receiver
